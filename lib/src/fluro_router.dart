@@ -13,6 +13,7 @@ import 'package:fluro/fluro.dart';
 import 'package:fluro/src/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 /// {@template fluro_router}
 /// Attach [FluroRouter] to [MaterialApp] by connnecting [FluroRouter.generator] to [MaterialApp.onGenerateRoute].
@@ -191,7 +192,7 @@ class FluroRouter {
           transition == TransitionType.nativeModal);
 
       if (isNativeTransition) {
-        return MaterialPageRoute<dynamic>(
+        return MaterialWithModalsPageRoute<dynamic>(
           settings: routeSettings,
           fullscreenDialog: transition == TransitionType.nativeModal,
           maintainState: maintainState,
@@ -202,7 +203,7 @@ class FluroRouter {
         );
       } else if (transition == TransitionType.material ||
           transition == TransitionType.materialFullScreenDialog) {
-        return MaterialPageRoute<dynamic>(
+        return MaterialWithModalsPageRoute<dynamic>(
           settings: routeSettings,
           fullscreenDialog:
               transition == TransitionType.materialFullScreenDialog,
@@ -214,7 +215,7 @@ class FluroRouter {
         );
       } else if (transition == TransitionType.cupertino ||
           transition == TransitionType.cupertinoFullScreenDialog) {
-        return CupertinoPageRoute<dynamic>(
+        return MaterialWithModalsPageRoute<dynamic>(
           settings: routeSettings,
           fullscreenDialog:
               transition == TransitionType.cupertinoFullScreenDialog,

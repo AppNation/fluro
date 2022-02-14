@@ -226,46 +226,46 @@ class FluroRouter {
           },
         );
       } else {
-        return MaterialWithModalsPageRoute<dynamic>(
-          settings: routeSettings,
-          fullscreenDialog: true,
-          maintainState: maintainState,
-          builder: (BuildContext context) {
-            return handler.handlerFunc(context, parameters) ??
-                SizedBox.shrink();
-          },
-        );
-        // RouteTransitionsBuilder? routeTransitionsBuilder;
-        //
-        // if (transition == TransitionType.custom) {
-        //   routeTransitionsBuilder =
-        //       transitionsBuilder ?? route?.transitionBuilder;
-        // } else {
-        //   routeTransitionsBuilder = _standardTransitionsBuilder(transition);
-        // }
-        //
-        // return PageRouteBuilder<dynamic>(
+        // return MaterialWithModalsPageRoute<dynamic>(
         //   settings: routeSettings,
+        //   fullscreenDialog: true,
         //   maintainState: maintainState,
-        //   pageBuilder: (BuildContext context, Animation<double> animation,
-        //       Animation<double> secondaryAnimation) {
+        //   builder: (BuildContext context) {
         //     return handler.handlerFunc(context, parameters) ??
         //         SizedBox.shrink();
         //   },
-        //   transitionDuration: transition == TransitionType.none
-        //       ? Duration.zero
-        //       : (transitionDuration ??
-        //           route?.transitionDuration ??
-        //           defaultTransitionDuration),
-        //   reverseTransitionDuration: transition == TransitionType.none
-        //       ? Duration.zero
-        //       : (transitionDuration ??
-        //           route?.transitionDuration ??
-        //           defaultTransitionDuration),
-        //   transitionsBuilder: transition == TransitionType.none
-        //       ? (_, __, ___, child) => child
-        //       : routeTransitionsBuilder!,
         // );
+        RouteTransitionsBuilder? routeTransitionsBuilder;
+
+        if (transition == TransitionType.custom) {
+          routeTransitionsBuilder =
+              transitionsBuilder ?? route?.transitionBuilder;
+        } else {
+          routeTransitionsBuilder = _standardTransitionsBuilder(transition);
+        }
+
+        return PageRouteBuilder<dynamic>(
+          settings: routeSettings,
+          maintainState: maintainState,
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return handler.handlerFunc(context, parameters) ??
+                SizedBox.shrink();
+          },
+          transitionDuration: transition == TransitionType.none
+              ? Duration.zero
+              : (transitionDuration ??
+                  route?.transitionDuration ??
+                  defaultTransitionDuration),
+          reverseTransitionDuration: transition == TransitionType.none
+              ? Duration.zero
+              : (transitionDuration ??
+                  route?.transitionDuration ??
+                  defaultTransitionDuration),
+          transitionsBuilder: transition == TransitionType.none
+              ? (_, __, ___, child) => child
+              : routeTransitionsBuilder!,
+        );
       }
     };
 

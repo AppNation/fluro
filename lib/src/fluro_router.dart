@@ -10,8 +10,6 @@
 import 'dart:async';
 
 import 'package:fluro/fluro.dart';
-import 'package:fluro/src/common.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -153,7 +151,10 @@ class FluroRouter {
     RouteSettings settingsToUse = routeSettings ?? RouteSettings(name: path);
 
     if (settingsToUse.name == null) {
-      settingsToUse = settingsToUse.copyWith(name: path);
+      settingsToUse = RouteSettings(
+        name: path,
+        arguments: settingsToUse.arguments,
+      );
     }
 
     AppRouteMatch? match = _routeTree.matchRoute(path!);
